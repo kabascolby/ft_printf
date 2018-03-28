@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 04:13:13 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 18:47:27 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/27 20:36:48 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void ft_conversion(t_p *p)
 	else if(p->f.type == '%')
 			p->f.str = "%";
 	else if(p->f.type == 'c')
-		p->f.types.c = (char)va_arg(p->ap, char *);
+		p->f.types.c = (char )va_arg(p->ap, int);
 	else
 		return ;
 	ft_field_width(p);

@@ -14,10 +14,6 @@ NAME = ft_printf.a
 FLAGS = -Wall -Wextra -Werror
 FILES = *.c
 LIBFT = libft.a
-
-all: $(NAME)
-
-
 $(NAME): $(OFILES)
 	@make re -C libft
 	@cp libft/libft.a ./$@
@@ -31,5 +27,5 @@ clean:
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@make fclean -C libft
-
+all: $(NAME)
 re: fclean all

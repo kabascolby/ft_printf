@@ -25,10 +25,6 @@ $(NAME): $(OFILES)
 	@gcc -c $(FLAGS) $(FILES)
 	@ar rc $(NAME) $(OFILES)
 	@ranlib $(NAME)
-
-%.o: %.c
-	gcc $(FLAGS) -c $<
-
 clean:
 	@/bin/rm -f $(FILES:.c=.o)
 	@make clean -C libft

@@ -22,7 +22,7 @@ all: $(NAME)
 $(NAME): $(OFILES)
 	@make re -C libft
 	@cp libft/libft.a ./$@
-	@gcc -c $(FLAGS) $(FILES)
+	@gcc $(FLAGS) $(FILES)
 	@ar rc $(NAME) $(OFILES)
 	@ranlib $(NAME)
 

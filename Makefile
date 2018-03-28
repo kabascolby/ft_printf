@@ -12,7 +12,7 @@
 
 NAME = ft_printf.a
 FLAGS = -Wall -Wextra -Werror
-FILES = $(wildcard *.c)
+FILES = *.c
 OFILES = $(patsubst %.c, %.o, $(FILES))
 LIBFT = libft.a
 

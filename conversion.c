@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 04:13:13 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 20:41:31 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 15:54:02 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void ft_conversion(t_p *p)
 	else if (p->f.type == 's')
 	{
 		p->f.str = (char *)va_arg(p->ap, char *);
-		p->f.str = !(p->f.str) ? strdup("(null)") : p->f.str;
+		p->f.str = !(p->f.str) ? ft_strdup("(null)") : p->f.str;
 	}
 	else if (CE_2(p->f.type, 'd', 'i'))
-		p->f.types.im = (intmax_t)va_arg(p->ap, intmax_t);		
+		p->f.types.im = (int)(intmax_t)va_arg(p->ap, intmax_t);		
 	else if((CE_5(p->f.type, 'o', 'u', 'x', 'O', 'U')) || (CE_3(p->f.type, 'X', 'D', 'p'))) // cheker le cas ou on donne les flags X et x
 			p->f.types.um = (uintmax_t)va_arg(p->ap, uintmax_t);
 	else if(p->f.type == '%')
 			p->f.str = "%";
 	else if(p->f.type == 'c')
-		p->f.types.c = (char )va_arg(p->ap, int);
+		p->f.types.c = (char)va_arg(p->ap, int);
 	else
 		return ;
 	ft_field_width(p);
@@ -54,7 +54,7 @@ void format_conversion(t_p *p)
 		p->f.str = ft_strnew(i);
 		while(i-- > -1)
 			p->f.str[i] = (char)p->f.types.ws[i];
-		p->f.str = !(p->f.types.ws) ? strdup("(null)") : p->f.str; // Test it later
+		p->f.str = !(p->f.types.ws) ? ft_strdup("(null)") : p->f.str; // Test it later
 	}
 	else if (((p->f.type == 'c') && (p->f.length == L)) || ((p->f.type == 'C') && (!p->f.length)))
 	{
@@ -69,7 +69,7 @@ void format_conversion2(t_p *p)
 	if(p->f.type == 'c')
 	{
 		p->f.str = ft_strnew(1);
-		p->f.str[0] = p->f.types.c;
+		p->f.str[0] = p->f.types.c; 
 	}
 	else if(p->f.type == 'D')
 		p->f.str = ft_strdup(ft_uitoabase((uintmax_t)p->f.types.um, 10, 0));
@@ -79,11 +79,13 @@ void format_conversion2(t_p *p)
 		p->f.str = ft_strdup(ft_uitoabase((uintmax_t)p->f.types.um, 8, 0));
 	if(CE_3(p->f.type, 'x', 'X', 'p'))
 	{
-		p->f.str = ft_strdup(ft_uitoabase((uintmax_t)p->f.types.um, 16, 0));
+		p->f.str = (p->f.length != L) ? ft_strdup(ft_uitoabase((int)p->f.types.um, 16, 0)) : p->f.str;
+		p->f.str = (p->f.length == L) ? ft_strdup(ft_uitoabase((long)p->f.types.um, 16, 0)) : p->f.str;
 		p->f.str = p->f.type == 'X' ? ft_strupcase(p->f.str) : p->f.str;
 	}
-	p->f.str = p->f.str ? ft_strdup(p->f.str) : NULL;
+	//p->f.str = p->f.str ? ft_strdup(p->f.str) : NULL;
 	p->f.len = ft_strlen(p->f.str);
+	
 }
 
 

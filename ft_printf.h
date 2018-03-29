@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:44 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 19:20:30 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 22:22:48 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# include <stdio.h> // REMOVE LATER NOT ALLOWED
-
 # define NUM(c) ((c) - '0')
 # define NUMBERSET "0123456789abcdef0123456789ABCDEF"
+# define __DARWIN_NULL ((void *)0)
 
 # define CE_(a, b) ((a) == (b))
 # define CE_2(a, b, c) (CE_(a, b) || CE_(a, c))

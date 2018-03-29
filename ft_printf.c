@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:32 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 17:46:31 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 15:01:47 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int ft_printf(char *s, ...)
     char *s2;
 
     ft_bzero(&p, sizeof(t_p));
-    p.s3 = s2 = s; 
+    p.s3 = s;
+    s2 = ft_strdup(s); 
     va_start(p.ap, s);
     while (*s && !(i = 0))
     {

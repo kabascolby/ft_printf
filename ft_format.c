@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 17:36:05 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 17:36:33 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 11:34:02 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void ft_field_width(t_p *p)
 	format_conversion(p);
 	p->f.prec ? ft_precision(p) : 0;
 	if(CE_2(p->f.type, 'o', 'O') && p->f.hash)
-		p->f.str = p->f.type == 'o' && p->f.str[0] != '0' ? ft_frsplitstr(&p->f.str, 1, "0") :  p->f.str ;
-	if(CE_3(p->f.type, 'x', 'X', 'p') && p->f.hash)
-		p->f.str = ft_frsplitstr(&p->f.str, 1, p->f.type == 'X' ? "0X" : "0x");
+		p->f.str = p->f.type == 'o' && p->f.str[0] != '0' ? ft_frsplitstr(&p->f.str, 1, "0") :  p->f.str;
+		
 	if (CE_5(p->f.type, 'd', 'i', '%', 's', 'S') || CE_5(p->f.type, 'C', 'c', 'D', 'x', 'X') || CE_3(p->f.type, 'o', 'O', 'p' ))
 	{
 		char f[p->f.field_w ? p->f.field_w + 1 : 1];
@@ -40,8 +39,8 @@ void ft_field_width(t_p *p)
 		fw = p->f.zero ? '0' : ' ';
 		ft_memset((char *)f, fw, p->f.field_w);
 		pos = p->f.min ? p->f.len + 1 : 1 + p->f.plus + p->f.space;
-		printf("position: %d, strlen: %d\n", pos, p->f.len);
 		p->f.str = ft_frsplitstr(&p->f.str, pos, f);		
 	}
-
+	if(CE_3(p->f.type, 'x', 'X', 'p') && p->f.hash)
+		ft_memset((char *)&p->f.str[1], (p->f.type == 'X' ? 'X' : 'x') , ft_strlen(p->f.str) > 1 ? 1 : 0);
 }

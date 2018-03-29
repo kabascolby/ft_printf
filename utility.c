@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 17:08:55 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 18:52:37 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 15:32:34 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 void ft_addnode(char *s1, int len, t_pfnode **head)
 {
     t_pfnode *str;
+    /* if(ft_strlen(s1) == 0 && *s1 =='\0')
+        len++; */
 
     if (s1 && len)
     {
@@ -101,6 +103,8 @@ char		*ft_uitoabase(uintmax_t val, int base, int opt)
 	int			i;
 	int 		o;
 
+    if(val == 0)
+        return("\0");
 	i = 30;
 	o = 0;
 	if (opt != 0)
@@ -116,17 +120,3 @@ char		*ft_uitoabase(uintmax_t val, int base, int opt)
 	}
 	return (buf + i + 1);
 }
-
-/* void ft_struct_check(t_args *flags)
-{
-    printf("plus: %d\n", flags->plus);
-    printf("min: %d\n", flags->min);
-    printf("space: %d\n", flags->space);
-    printf("hash: %d\n", flags->hash);
-    printf("zero: %d\n", flags->zero);
-    printf("prec: %d\n", flags->prec);
-    printf("precis: %d\n", flags->precis);
-    printf("field_w: %d\n", flags->field_w);
-    printf("length: %d\n", flags->length);
-    printf("type: %c\n", flags->type);
-} */

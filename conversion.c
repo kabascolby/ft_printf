@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 04:13:13 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/28 15:54:02 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 23:23:39 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ft_conversion(t_p *p)
 	else if((CE_5(p->f.type, 'o', 'u', 'x', 'O', 'U')) || (CE_3(p->f.type, 'X', 'D', 'p'))) // cheker le cas ou on donne les flags X et x
 			p->f.types.um = (uintmax_t)va_arg(p->ap, uintmax_t);
 	else if(p->f.type == '%')
-			p->f.str = "%";
+			p->f.str = ft_strdup("%");
 	else if(p->f.type == 'c')
 		p->f.types.c = (char)va_arg(p->ap, int);
 	else
@@ -71,8 +71,6 @@ void format_conversion2(t_p *p)
 		p->f.str = ft_strnew(1);
 		p->f.str[0] = p->f.types.c; 
 	}
-	else if(p->f.type == 'D')
-		p->f.str = ft_strdup(ft_uitoabase((uintmax_t)p->f.types.um, 10, 0));
 	else if(p->f.type == 'D')
 		p->f.str = ft_strdup(ft_uitoabase((uintmax_t)p->f.types.um, 10, 0));
 	if(CE_2(p->f.type, 'o', 'O'))

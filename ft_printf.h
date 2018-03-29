@@ -6,13 +6,13 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:44 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/28 22:41:40 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/28 23:16:28 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _FT_PRINTF_H
 # define _FT_PRINTF_H
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -81,7 +81,7 @@ char 		*ft_parse2(char *s, t_p *p);
 char 		*ft_parse3(char *s, t_p *p);
 char 		*ft_parse4(char *s, t_p *p);
 void 		ft_conversion(t_p *p);
-void 		ft_struct_check(t_args *flags);
+//ft_struct_check(t_args *flags);
 void 		format_conversion(t_p *p);
 void 		format_conversion2(t_p *p);
 void 		ft_precision(t_p *p);

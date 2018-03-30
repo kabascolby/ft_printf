@@ -6,7 +6,7 @@
 #    By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/27 18:43:13 by lkaba             #+#    #+#              #
-#    Updated: 2018/03/28 23:14:42 by lkaba            ###   ########.fr        #
+#    Updated: 2018/03/28 23:48:54 by lkaba            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ $(LIBFT): force
 force:
 	@true
 
-cd clean:
-	@/bin/rm -f $(FILES:.c=.o)
+clean:
+	@/bin/rm -f $(OFILES)
 	@make clean -C libft
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:32 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/29 16:20:14 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/29 17:08:16 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_printf(char *s, ...)
 {
-    int i;
+    size_t i;
     i = 0;
     t_p     p;
     char *s2;
@@ -27,7 +27,7 @@ int ft_printf(char *s, ...)
     {
         while (s[i] && s[i] != '%')
             ++i;
-        ft_addnode(s2, i, &p.head);
+        ft_addnode(&p, s2, i);
         if (s[i] == '%')
         {
             s = ft_parse1(s + i + 1, &p);
@@ -37,5 +37,5 @@ int ft_printf(char *s, ...)
             s = s + i;
     }
     va_end(p.ap);
-    return (ft_nodeprint(&p.head));
+    return (ft_nodeprint(&p));
 }

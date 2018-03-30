@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:37 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/27 19:21:03 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/29 20:28:34 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ char *ft_parse4(char *s, t_p *p)
 		return (s);
 	}
 	ft_conversion(p);
-	ft_addnode(p->f.str, ft_strlen(p->f.str), &p->head);
+	ft_addnode(p, p->f.str, ft_strlen(p->f.str));
+	//ft_addnode(p, ft_strlen(p->f.str), &p->head);
 	//ft_struct_check(&p->f);
 	return (s);
 }

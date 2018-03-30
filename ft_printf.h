@@ -6,19 +6,19 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:44 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/28 23:16:28 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/03/30 02:51:33 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _FT_PRINTF_H
 # define _FT_PRINTF_H
-# include "libft.h"
+# include "libft/libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 # define NUM(c) ((c) - '0')
 # define NUMBERSET "0123456789abcdef0123456789ABCDEF"
-# define __DARWIN_NULL ((void *)0)
 
 # define CE_(a, b) ((a) == (b))
 # define CE_2(a, b, c) (CE_(a, b) || CE_(a, c))
@@ -32,7 +32,7 @@ typedef union  s_values
 	char 		c;
 	char 		*str;
 	wchar_t 	*ws;
-	intmax_t 	im;
+	int64_t		im;
 	uintmax_t 	um;
 	void		*p;
 }			t_value;
@@ -58,8 +58,10 @@ typedef struct 		s_args
 	unsigned int 	length;
 	char 			type;
 	char 			*str;
-	char			sign;
+	unsigned int	sign;
 	unsigned int	len;
+	int 			pos;
+	char 			fw;
 	t_value			types;
 } 					t_args;
 
@@ -72,10 +74,11 @@ typedef struct		s_printf
 }					t_p;
 
 enum 		length{H = 1, HH, L, LL, J, Z};
-void 		ft_addnode(char *s1, int len, t_pfnode **head);
+void 		ft_addnode(t_p *p, char *s1, size_t len);
+//void 		ft_addnode(char *s1, int len, t_pfnode **head);
 int 		ft_printf(char *s, ...);
-int 		ft_nodeprint(t_pfnode **l_head);
-void 		ft_reverse(t_pfnode **h);
+int 		ft_nodeprint(t_p *p);
+void 		ft_reverse(t_p *p);
 char 		*ft_parse1(char *s, t_p *p);
 char 		*ft_parse2(char *s, t_p *p);
 char 		*ft_parse3(char *s, t_p *p);
@@ -84,6 +87,7 @@ void 		ft_conversion(t_p *p);
 //ft_struct_check(t_args *flags);
 void 		format_conversion(t_p *p);
 void 		format_conversion2(t_p *p);
+void 		format_conversion3(t_p *p);
 void 		ft_precision(t_p *p);
 void 		ft_field_width(t_p *p);
 void 		flags_space_sign(t_p *p);

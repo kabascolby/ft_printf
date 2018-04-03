@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:32 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/30 04:56:21 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/02 18:05:10 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int ft_printf(char *s, ...)
     
     while (*s && !(i = 0))
     {
+        ft_bzero(&p.f, sizeof(t_args));
         while (s[i] && s[i] != '%')
             ++i;
         ft_addnode(&p, s2, i);

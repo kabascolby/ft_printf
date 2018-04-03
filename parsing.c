@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:37 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/29 20:28:34 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/02 19:02:50 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char *ft_parse1(char *s, t_p *p)
 {
-	ft_bzero(&p->f, sizeof(t_args));
 	while (*s)
 	{
 		p->f.hash = *s == '#' ? 1 : p->f.hash;
@@ -87,34 +86,18 @@ char *ft_parse3(char *s, t_p *p)
 
 char *ft_parse4(char *s, t_p *p)
 {
-	if (CE_5(*s, 's', 'S', 'p', 'd', 'D') || CE_5(*s, 'i', 'o', 'O', 'u', 'U') || CE_5(*s, 'x', 'X', 'c', 'C', '%'))
+	if (CE_5(*s, 's', 'S', 'p', 'd', 'D') || CE_5(*s, 'i', 'o', 'O', 'u', 'U') ||
+		CE_5(*s, 'x', 'X', 'c', 'C', '%') || *s == 'b')
 	{
 		//char str[]="s, S, p, d, D, i, o, O, u, U, x, X, c, C, %";
-		p->f.type = *s == 's' ? 's' : p->f.type;
-		p->f.type = *s == 'S' ? 'S' : p->f.type;
-		p->f.type = *s == 'p' ? 'p' : p->f.type;
-		p->f.type = *s == 'd' ? 'd' : p->f.type;
-		p->f.type = *s == 'D' ? 'D' : p->f.type;
-		p->f.type = *s == 'i' ? 'i' : p->f.type;
-		p->f.type = *s == 'o' ? 'o' : p->f.type;
-		p->f.type = *s == 'O' ? 'O' : p->f.type;
-		p->f.type = *s == 'u' ? 'u' : p->f.type;
-		p->f.type = *s == 'U' ? 'U' : p->f.type;
-		p->f.type = *s == 'x' ? 'x' : p->f.type;
-		p->f.type = *s == 'X' ? 'X' : p->f.type;
-		p->f.type = *s == 'c' ? 'c' : p->f.type;
-		p->f.type = *s == 'C' ? 'C' : p->f.type;
-		p->f.type = *s == '%' ? '%' : p->f.type;
+		p->f.type = *s;
+		
 		s++;
 	}
 	else
-	{
-		//printf("dasfasdfasdfasfsafdfasfd%s\n",p->f.str);
-		return (s);
-	}
+		return (s);		
 	ft_conversion(p);
-	ft_addnode(p, p->f.str, ft_strlen(p->f.str));
-	//ft_addnode(p, ft_strlen(p->f.str), &p->head);
-	//ft_struct_check(&p->f);
+	
+	ft_addnode(p, p->f.str, p->f.len);
 	return (s);
 }

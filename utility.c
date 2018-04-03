@@ -6,26 +6,33 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 17:08:55 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/30 03:53:22 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/02 19:52:38 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* reverse a linked list */
-//void ft_addnode(char *s1, int len, t_pfnode *p->headead)
-//ft_addnode(p, ft_strlen(p->f.str), &p->head);
+
 void ft_addnode(t_p *p, char *s1, size_t len)
 {
+    char    *tmp;
 
     t_pfnode *str;
-    /* if(ft_strlen(s1) == 0 && *s1 =='\0')
-        len++; */
-    //ft_addnode(p, ft_strlen(p->f.str), &p->head);
-    if (s1)
+    if ((s1 && len) || (!p->f.types.c && CE_2(p->f.type, 'c', 'C')))
     {
         str = (t_pfnode *)malloc(sizeof(t_pfnode));
         bzero(str, sizeof(t_pfnode));
+        if (!p->f.types.c && CE_2(p->f.type, 'c', 'C'))
+        {
+            tmp = ft_strnew(len + 1);
+            if (!p->f.min)
+                ft_strncpy(tmp, s1, len);
+            else
+                ft_strncpy(&tmp[1], s1, len);
+            ++len;
+            free(s1);
+            s1 = tmp;
+        }
         str->s = s1;
         str->c = len;
         str->next = p->head;
@@ -42,15 +49,16 @@ int ft_nodeprint(t_p *p)
     while (p->head)
     {
         temp = p->head;
-        temp->c += (temp->s && temp->s[0] == 0 && p->f.type == 'c') ? 1 : 0;
+        //temp->c += (temp->s && p->f.types.c == 0 && p->f.type == 'c') ? 1 : 0;
         cpt += temp->c;
         write(1, temp->s, temp->c);
-        p->head = (p->head)->next;
+        p->head = p->head->next;
         free(temp->s);
         free(temp);
     }
     return (cpt);
 }
+
 void ft_reverse(t_p *p)
 {
     t_pfnode *prev;
@@ -109,7 +117,6 @@ char *ft_uitoabase(uintmax_t val, int base, int opt)
         return (ft_strcpy(buf, "0\0"));
     while (val > 0 && i > 0)
     {
-
         buf[i] = set[(val % base) + o];
         val = val / base;
         --i;

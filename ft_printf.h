@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:44 by lkaba             #+#    #+#             */
-/*   Updated: 2018/03/30 02:51:33 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/02 13:01:48 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void 		format_conversion2(t_p *p);
 void 		format_conversion3(t_p *p);
 void 		ft_precision(t_p *p);
 void 		ft_field_width(t_p *p);
+void 		ft_field_width2(t_p *p);
 void 		flags_space_sign(t_p *p);
 void 		flags_zero(t_p *p);
 char 		*ft_frsplitstr(char **s, int j, char *s2);

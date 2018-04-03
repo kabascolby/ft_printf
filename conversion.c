@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 04:13:13 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/02 23:04:12 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/02 23:30:25 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,15 @@ void ft_conversion(t_p *p)
 	}
 	else if (CE_3(p->f.type, 'd', 'i', 'D'))
 		p->f.types.im = (int64_t)va_arg(p->ap, int64_t);		
-	else if((CE_5(p->f.type, 'o', 'u', 'x', 'O', 'U')) || (CE_2(p->f.type, 'X', 'b')))
+	else if((CE_5(p->f.type, 'o', 'u', 'x', 'O', 'U')) || (CE_3(p->f.type, 'X', 'p', 'b')))
 		p->f.types.um = (uintmax_t)va_arg(p->ap, uintmax_t);
-	else if (p->f.type == 'p')
-		p->f.types.p = (void *)va_arg(p->ap, void *);
 	else if(p->f.type == '%')
 			p->f.str = ft_strdup("%");
 	else if(p->f.type == 'c')
 		p->f.types.c = (char)va_arg(p->ap, int);
 	else
 		return ;
-	p->f.length = CE_5(p->f.type, 'D', 'O', 'U', 'S', 'C') || p->f.type == 'p'  ? L : p->f.length;
+	p->f.length = CE_5(p->f.type, 'D', 'O', 'U', 'S', 'C') ? L : p->f.length;	
 	ft_field_width(p);
 }
 
@@ -138,7 +136,7 @@ void format_conversion3(t_p *p)
 		p->f.str =  !p->f.types.um  && p->f.hash && !p->f.precis ? ft_strdup("0") : p->f.str;
 	}
 	if(CE_3(p->f.type, 'x', 'X', 'p'))
-	{	
+	{		
 		p->f.str = (!p->f.length) ? ft_strdup(ft_uitoabase((unsigned int)p->f.types.um, 16, 0)) : p->f.str;
 		p->f.str = (p->f.length == H) ? ft_strdup(ft_uitoabase((unsigned short)p->f.types.um, 16, 0)) : p->f.str;
 		p->f.str = (p->f.length == HH) ? ft_strdup(ft_uitoabase((unsigned char)p->f.types.um, 16, 0)) : p->f.str;

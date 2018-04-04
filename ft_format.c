@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 17:36:05 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/03 19:33:43 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/03 19:48:42 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void ft_field_width2(t_p *p)
 	{
 		s = p->f.type == 'X' ? "0X" : "0x";
 		p->f.pos = !p->f.zero && !p->f.min ? p->f.field_w + 1 : 1;
-		p->f.str = p->f.types.um ? ft_frsplitstr(&p->f.str, p->f.pos, s) : p->f.str;
+		p->f.str = p->f.types.um || p->f.type == 'p' ? ft_frsplitstr(&p->f.str, p->f.pos, s) : p->f.str;
 	}
 	p->f.len = ft_strlen(p->f.str);
 }

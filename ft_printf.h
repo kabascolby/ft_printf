@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:44 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/02 13:01:48 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/03 17:43:06 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct 		s_args
 	u_int8_t 		zero;
 	u_int8_t 		start;
 	u_int8_t 		prec;
-	unsigned int 	field_w;
+	int 			field_w;
 	unsigned int 	precis;
 	unsigned int 	length;
 	char 			type;

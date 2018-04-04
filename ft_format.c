@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 17:36:05 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/02 21:45:15 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/03 17:59:09 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void ft_field_width(t_p *p)
 	p->f.plus ? p->f.str = ft_frsplitstr(&p->f.str, 1 , "+") : 0;
 	p->f.len = ft_strlen(p->f.str);
 	p->f.field_w = (p->f.field_w < p->f.len) ? 0 : p->f.field_w - p->f.len;
-	p->f.field_w -= (p->f.hash  && p->f.field_w && CE_2(p->f.type, 'x', 'X')) || p->f.type == 'p' ? 2 : 0;
+	
+	p->f.field_w -= ((p->f.hash  && p->f.field_w && CE_2(p->f.type, 'x', 'X')) || p->f.type == 'p') ? 2 : 0;
 	p->f.field_w -= (p->f.hash && p->f.field_w && CE_2(p->f.type, 'o', 'O')) ? 1  : 0;
+	p->f.field_w = p->f.field_w < 0 ? 0 : p->f.field_w;
 	f[p->f.field_w] = '\0';
 	p->f.fw = p->f.zero ? '0' : ' ';
 	ft_memset(f, p->f.fw, p->f.field_w);

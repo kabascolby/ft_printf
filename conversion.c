@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 04:13:13 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/02 23:30:25 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/03 17:28:18 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void ft_conversion(t_p *p)
 		p->f.types.c = (char)va_arg(p->ap, int);
 	else
 		return ;
-	p->f.length = CE_5(p->f.type, 'D', 'O', 'U', 'S', 'C') ? L : p->f.length;	
+	p->f.length = CE_5(p->f.type, 'D', 'O', 'U', 'S', 'C') || (p->f.type == 'p') ? L : p->f.length;	
 	ft_field_width(p);
 }
 

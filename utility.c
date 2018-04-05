@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 17:08:55 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/02 19:52:38 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/04 18:20:00 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void ft_addnode(t_p *p, char *s1, size_t len)
         str->next = p->head;
         p->head = str;
     }
+    else
+        free(s1);
 }
 
 int ft_nodeprint(t_p *p)
@@ -79,7 +81,7 @@ void ft_reverse(t_p *p)
     p->head = prev;
 }
 
-char *ft_frsplitstr(char **s, int j, char *s2)
+char *ft_spf(char **s, int j, char *s2)
 {
     int i;
     int k;
@@ -87,7 +89,7 @@ char *ft_frsplitstr(char **s, int j, char *s2)
     k = 0;
     i = 0;
     char *str;
-    if (!s2)
+    if (!s2 || !*s2)
         return (*s);
     if (!(str = (char *)malloc(sizeof(char) * (ft_strlen(*s) + ft_strlen(s2)) + 1)))
         return (0);
@@ -99,12 +101,12 @@ char *ft_frsplitstr(char **s, int j, char *s2)
         str[i++] = (*s)[k++];
     str[i] = '\0';
     ft_strdel(s);
-    free(*s);
+    //free(*s);
     return (str);
 }
 char *ft_uitoabase(uintmax_t val, int base, int opt)
 {
-    static char buf[32] = "0";
+    static char buf[32];
     char set[32] = NUMBERSET;
     int i;
     int o;
@@ -114,12 +116,12 @@ char *ft_uitoabase(uintmax_t val, int base, int opt)
     if (opt != 0)
         o = 16;
     if (val == 0)
-        return (ft_strcpy(buf, "0\0"));
+        return (ft_strdup("0"));
     while (val > 0 && i > 0)
     {
         buf[i] = set[(val % base) + o];
         val = val / base;
         --i;
     }
-    return (buf + i + 1);
+    return (ft_strdup(buf + i + 1));
 }

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:44 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/03 17:43:06 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/04 16:18:09 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # define CE_3(a, b, c, d) (CE_(a, b) || CE_(a, c) || CE_(a, d))
 # define CE_4(a, b, c, d, e) (CE_2(a, b, c) || CE_2(a, d, e))
 # define CE_5(a, b, c, d, e, f) (CE_3(a, b, c, d) || CE_2(a, e, f))
+
+# define UM p->f.types.um
+# define IM p->f.types.im
+# define PL p->f.length
+# define STR p->f.str
 
 typedef union  s_values
 {
@@ -53,13 +58,13 @@ typedef struct 		s_args
 	u_int8_t 		zero;
 	u_int8_t 		start;
 	u_int8_t 		prec;
-	int 			field_w;
+	int 			f_w;
 	unsigned int 	precis;
-	unsigned int 	length;
+	unsigned int 	l;
 	char 			type;
 	char 			*str;
 	unsigned int	sign;
-	unsigned int	len;
+	int				len;
 	int 			pos;
 	char 			fw;
 	t_value			types;
@@ -73,7 +78,7 @@ typedef struct		s_printf
 	char			*s3;
 }					t_p;
 
-enum 		length{H = 1, HH, L, LL, J, Z};
+enum 		l{H = 1, HH, L, LL, J, Z};
 void 		ft_addnode(t_p *p, char *s1, size_t len);
 //void 		ft_addnode(char *s1, int len, t_pfnode **head);
 int 		ft_printf(char *s, ...);
@@ -93,6 +98,6 @@ void 		ft_field_width(t_p *p);
 void 		ft_field_width2(t_p *p);
 void 		flags_space_sign(t_p *p);
 void 		flags_zero(t_p *p);
-char 		*ft_frsplitstr(char **s, int j, char *s2);
+char 		*ft_spf(char **s, int j, char *s2);
 char		*ft_uitoabase(uintmax_t val, int base, int opt);
 #endif

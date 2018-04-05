@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:37 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/03 17:17:59 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/04 18:13:39 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ char *ft_parse1(char *s, t_p *p)
 char *ft_parse2(char *s, t_p *p)
 {
 	while (ft_isdigit(*s))
-		p->f.field_w = (10 * p->f.field_w) + NUM(*(s++));
+		p->f.f_w = (10 * p->f.f_w) + NUM(*(s++));
 	//printf("string %s\n", s);
 	/* else if (*s == '*')
 		{
-			length = va_arg(*argp, int);s
+			l = va_arg(*argp, int);s
 			*++fmt;
-			if (length < 0)
+			if (l < 0)
 			{
 				ladjust = !ladjust;
-				length = -length;
+				l = -l;
 			}
 		} */
 	if (*s == '.')
@@ -65,18 +65,18 @@ char *ft_parse3(char *s, t_p *p)
 	int k;
 
 	k = 1;
-	((*s == 'h') && (*(s + 1) != 'h')) ? p->f.length = H : 1;
-	((*s == 'l') && (*(s + 1) != 'l')) ? p->f.length = L : k;
-	(*s == 'j') ? p->f.length = J : k;
-	(*s == 'z') ? p->f.length = Z : k;
+	((*s == 'h') && (*(s + 1) != 'h')) ? p->f.l = H : 1;
+	((*s == 'l') && (*(s + 1) != 'l')) ? p->f.l = L : k;
+	(*s == 'j') ? p->f.l = J : k;
+	(*s == 'z') ? p->f.l = Z : k;
 	if ((*s == 'h') && *(s + 1) == 'h')
 	{
-		p->f.length = HH;
+		p->f.l = HH;
 		s++;
 	}
 	if ((*s == 'l') && *(s + 1) == 'l')
 	{
-		p->f.length = LL;
+		p->f.l = LL;
 		s++;
 	}
 	if (CE_4(*s, 'h', 'l', 'j', 'z'))
@@ -89,14 +89,15 @@ char *ft_parse4(char *s, t_p *p)
 	if (CE_5(*s, 's', 'S', 'p', 'd', 'D') || CE_5(*s, 'i', 'o', 'O', 'u', 'U') ||
 		CE_5(*s, 'x', 'X', 'c', 'C', '%') || *s == 'b')
 	{
-		//char str[]="s, S, p, d, D, i, o, O, u, U, x, X, c, C, %";
 		p->f.type = *s;
 		s++;
 	}
 	else
 		return (s);		
 	ft_conversion(p);
-	
-	ft_addnode(p, p->f.str, p->f.len);
+	format_conversion(p);
+	ft_precision(p);
+	ft_field_width(p);
+	ft_addnode(p, STR, p->f.len);
 	return (s);
 }

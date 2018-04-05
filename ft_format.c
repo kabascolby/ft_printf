@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 17:36:05 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/04 18:20:36 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/05 14:55:13 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void ft_field_width(t_p *p)
 	p->f.fw = p->f.zero ? '0' : ' ';
 	ft_memset(f, p->f.fw, p->f.f_w);
 	STR = p->f.zero ? ft_spf(&STR, 1 + p->f.sign + p->f.plus, f) : STR;
-	p->f.pos = p->f.min ? p->f.len + 1 : (1 + p->f.plus - p->f.sign - p->f.plus);
+	p->f.pos = p->f.min ? p->f.len + 1 : (1  - p->f.sign);
 	STR = !p->f.zero ? ft_spf(&STR, p->f.pos, f) : STR;
 	ft_field_width2(p);
 }

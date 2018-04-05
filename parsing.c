@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:37 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/04 18:13:39 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/05 15:42:30 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,24 @@ char *ft_parse2(char *s, t_p *p)
 {
 	while (ft_isdigit(*s))
 		p->f.f_w = (10 * p->f.f_w) + NUM(*(s++));
-	//printf("string %s\n", s);
-	/* else if (*s == '*')
-		{
-			l = va_arg(*argp, int);s
-			*++fmt;
-			if (l < 0)
-			{
-				ladjust = !ladjust;
-				l = -l;
-			}
-		} */
+	if (*s == '*')
+	{
+		p->f.f_w = (int)va_arg(p->ap, int);
+		s++;
+	}
 	if (*s == '.')
 	{
 		s++;
 		p->f.prec = 1;
+		p->f.zero = 0;		
 		while (ft_isdigit(*s))
 			p->f.precis = (10 * p->f.precis) + NUM(*(s++));
-		p->f.zero = 0;
+		if (*s == '*')
+		{
+			p->f.precis = (unsigned int)va_arg(p->ap, unsigned int);
+			//ft_putnbr(p->f.precis);
+			s++;
+		}
 	}
 	//s++;
 	return (ft_parse3(s, p));

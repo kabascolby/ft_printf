@@ -6,13 +6,13 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 20:15:37 by lkaba             #+#    #+#             */
-/*   Updated: 2018/04/05 15:42:30 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/04/05 18:05:48 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *ft_parse1(char *s, t_p *p)
+char	*ft_parse1(char *s, t_p *p)
 {
 	while (*s)
 	{
@@ -21,19 +21,16 @@ char *ft_parse1(char *s, t_p *p)
 		p->f.plus = *s == '+' ? 1 : p->f.plus;
 		p->f.zero = *s == '0' ? 1 : p->f.zero;
 		p->f.space = *s == ' ' ? 1 : p->f.space;
-
 		if (!CE_5(*s, '#', '-', '+', ' ', '0'))
-			break;
+			break ;
 		s++;
 	}
-	/** if plus is on then the space is off, if min is on then zero is off **/
 	p->f.space = p->f.plus ? 0 : p->f.space;
 	p->f.zero = p->f.min ? 0 : p->f.zero;
-	
-	 //this behavior is define in the man but the implementaton is opposite might see later
 	return (ft_parse2(s, p));
 }
-char *ft_parse2(char *s, t_p *p)
+
+char	*ft_parse2(char *s, t_p *p)
 {
 	while (ft_isdigit(*s))
 		p->f.f_w = (10 * p->f.f_w) + NUM(*(s++));
@@ -46,21 +43,19 @@ char *ft_parse2(char *s, t_p *p)
 	{
 		s++;
 		p->f.prec = 1;
-		p->f.zero = 0;		
+		p->f.zero = 0;
 		while (ft_isdigit(*s))
 			p->f.precis = (10 * p->f.precis) + NUM(*(s++));
 		if (*s == '*')
 		{
 			p->f.precis = (unsigned int)va_arg(p->ap, unsigned int);
-			//ft_putnbr(p->f.precis);
 			s++;
 		}
 	}
-	//s++;
 	return (ft_parse3(s, p));
 }
 
-char *ft_parse3(char *s, t_p *p)
+char	*ft_parse3(char *s, t_p *p)
 {
 	int k;
 
@@ -84,16 +79,18 @@ char *ft_parse3(char *s, t_p *p)
 	return (ft_parse4(s, p));
 }
 
-char *ft_parse4(char *s, t_p *p)
+char	*ft_parse4(char *s, t_p *p)
 {
-	if (CE_5(*s, 's', 'S', 'p', 'd', 'D') || CE_5(*s, 'i', 'o', 'O', 'u', 'U') ||
-		CE_5(*s, 'x', 'X', 'c', 'C', '%') || *s == 'b')
+	if (CE_5(*s, 's', 'S', 'p', 'd', 'D') ||
+		CE_5(*s, 'i', 'o', 'O', 'u', 'U') ||
+		CE_5(*s, 'x', 'X', 'c', 'C', '%') ||
+		*s == 'b')
 	{
 		p->f.type = *s;
 		s++;
 	}
 	else
-		return (s);		
+		return (s);
 	ft_conversion(p);
 	format_conversion(p);
 	ft_precision(p);
